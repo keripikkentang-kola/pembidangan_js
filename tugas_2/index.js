@@ -53,6 +53,59 @@ class Bank {
             case true:
                 console.log("Silahkan masukkan nominal")
                 console.log(this.nominalTf)
+                if(this.jenisUang !== uang.seratusRibu) {
+                    console.log("Ga ada pecahan lain elah")
+                } else {
+                    if(this.nominalTf % 100000 == 50000) {
+                        console.log("Hanya melayani pecahan 100.000")
+                    }
+                    if(this.nominalTf % 100000 == 0) {
+                        if(this.nominalTf <= this.saldo) {
+                            console.log("Transfer berhasil")
+                            this.saldo = this.saldo - this.nominalTf
+                            console.log("Saldo anda sekarang = " + this.saldo)
+                        } else if(this.nominalTf > this.saldo) {
+                            console.log("Saldo anda kurang, isi dulu")
+                        } else {
+                            console.log("Isi dulu nominalnya bambang")
+                        }
+                    }
+                }
+                break
+            case false:
+                console.log("Transaksi selesai anda akan dikeluarkan otomatis")
+        }
+    }
+
+    selesai() {
+        console.log("--------SELESAI--------")
+        console.log("Transaksi selesai anda akan dikeluarkan otomatis")
+    }
+}
+
+class Atm extends Bank {
+    constructor(pin, tf, nominalTf = 0, jenisUang){
+        super(pin, tf, nominalTf)
+        this.jenisUang = jenisUang
+    }
+    pilihUang () {
+        console.log("--------NOMINAL YANG AKAN KELUAR--------")
+        if(this.jenisUang == uang.limaPuluhRibu) {
+            console.log("Uang yang akan keluar pecahan 50.000")
+        } else if(this.jenisUang == uang.seratusRibu) {
+            console.log("Uang yang akan keluar pecahan 100.000")
+        } else {
+            console.log("Pecahan tidak tersedia")
+        }
+    }
+    transfer() {
+        console.log("--------TRANSFER--------")
+        console.log("Apakah anda ingin transfer?")
+        console.log(this.tf)
+        switch(this.tf){
+            case true:
+                console.log("Silahkan masukkan nominal")
+                console.log(this.nominalTf)
                 if(this.jenisUang === uang.seratusRibu) {
                     if(this.nominalTf % 100000 == 50000) {
                         console.log("Hanya melayani pecahan 100.000")
@@ -88,41 +141,19 @@ class Bank {
                 console.log("Transaksi selesai anda akan dikeluarkan otomatis")
         }
     }
-
-    selesai() {
-        console.log("--------SELESAI--------")
-        console.log("Transaksi selesai anda akan dikeluarkan otomatis")
-    }
-}
-
-class Atm extends Bank {
-    constructor(pin, tf, nominalTf = 0, jenisUang){
-        super(pin, tf, nominalTf)
-        this.jenisUang = jenisUang
-    }
-    pilihUang () {
-        console.log("--------NOMINAL YANG AKAN KELUAR--------")
-        if(this.jenisUang == uang.limaPuluhRibu) {
-            console.log("Uang yang akan keluar pecahan 50.000")
-        } else if(this.jenisUang == uang.seratusRibu) {
-            console.log("Uang yang akan keluar pecahan 100.000")
-        } else {
-            console.log("Pecahan tidak tersedia")
-        }
-    }
 }
 
 // const bank = new Bank(123456, false)
-// const bank = new Bank(123456, true, 1600000)
-// bank.masuk()
-// bank.cekSaldo()
-// bank.transfer()
-// bank.selesai()
+const bank = new Bank(123456, true, 1050000)
+bank.masuk()
+bank.cekSaldo()
+bank.transfer()
+bank.selesai()
 
-const atm = new Atm(123456, false, 0, 100000)
-// const atm = new Atm(123456, true, 500000, 100000)
-atm.masuk()
-atm.cekSaldo()
-atm.pilihUang()
-atm.transfer()
-atm.selesai()
+// const atm = new Atm(123456, false, 0, 100000)
+// const atm = new Atm(123456, true, 550000, 50000)
+// atm.masuk()
+// atm.cekSaldo()
+// atm.pilihUang()
+// atm.transfer()
+// atm.selesai()
